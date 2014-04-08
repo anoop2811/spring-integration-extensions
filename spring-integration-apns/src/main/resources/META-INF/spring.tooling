@@ -1,0 +1,4 @@
+# Tooling related information for the integration SpringIntegrationApns namespace
+http\://www.springframework.org/schema/integration/spring-integration-apns@name=integration SpringIntegrationApns Namespace
+http\://www.springframework.org/schema/integration/spring-integratoin-apns@prefix=int-apns
+http\://www.springframework.org/schema/integration/spring-integratoin-apns@icon=org/springframework/integration/config/xml/spring-integration-apns.gif

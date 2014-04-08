@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xsd:schema xmlns="http://www.springframework.org/schema/integration/apns"
+		xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+		xmlns:beans="http://www.springframework.org/schema/beans"
+		xmlns:tool="http://www.springframework.org/schema/tool"
+		xmlns:integration="http://www.springframework.org/schema/integration"
+		targetNamespace="http://www.springframework.org/schema/integration/apns"
+		elementFormDefault="qualified"
+		attributeFormDefault="unqualified">
+
+
+
+	<xsd:import namespace="http://www.springframework.org/schema/beans"/>
+	<xsd:import namespace="http://www.springframework.org/schema/tool"/>
+	<xsd:import namespace="http://www.springframework.org/schema/integration"
+			schemaLocation="http://www.springframework.org/schema/integration/spring-integration-3.0.xsd"/>
+
+	<xsd:annotation>
+		<xsd:documentation><![CDATA[
+	Defines the configuration elements for Apple push notification adapters.
+		]]></xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:element name="feedback-channel-adapter">
+		<xsd:annotation>
+			<xsd:documentation>
+				Defines an inbound Apple Feedback Channel Adapter.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attributeGroup ref="integration:channelAdapterAttributes" />
+			<xsd:attributeGroup ref="apnsCommonAttributes" />
+			<xsd:attribute name="send-timeout" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>
+						Maximum amount of time in milliseconds to wait
+						when sending
+						a message to the channel if such channel may block.
+						For example, a Queue Channel can block until space
+						is available if
+						its maximum capacity has been reached.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+			<xsd:attribute name="receive-timeout" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>
+						Maximum amount of time in milliseconds to wait
+						when receiving
+						input from the apple push feedback service
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+		</xsd:complexType>
+	</xsd:element>
+
+
+	<xsd:element name="outbound-channel-adapter">
+		<xsd:annotation>
+			<xsd:documentation>
+				Defines an outbound gateway for sending apple push
+				notifications.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:choice minOccurs="0" maxOccurs="1">
+				<xsd:element name="request-handler-advice-chain" type="integration:adviceChainType"
+					minOccurs="0" maxOccurs="1" />
+			</xsd:choice>
+			<xsd:attribute name="send-timeout" type="xsd:string">
+				<xsd:annotation>
+					<xsd:documentation>
+						Maximum amount of time in milliseconds to wait
+						when sending
+						a message to APNS server.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+			<xsd:attributeGroup ref="integration:channelAdapterAttributes" />
+			<xsd:attributeGroup ref="apnsCommonAttributes" />
+		</xsd:complexType>
+	</xsd:element>
+
+
+	<xsd:attributeGroup name="apnsCommonAttributes">
+		<xsd:attribute name="is-sandbox" type="xsd:string">
+			<xsd:annotation>
+				<xsd:documentation>
+					<![CDATA[
+	This attribute can be used to switch between the apple production servers and the sandbox servers. Defaults to 'false'
+					]]></xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="certificate-path" type="xsd:string"
+			use="required">
+			<xsd:annotation>
+				<xsd:documentation>
+					<![CDATA[
+	The path from where the certificate would be used for establishing a secure connection with the apple
+	push server
+					]]></xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="key-store-password" type="xsd:string"
+			use="required">
+			<xsd:annotation>
+				<xsd:documentation>
+					<![CDATA[
+	Password to be used with the certificate for secure connection
+					]]></xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="error-handler" type="xsd:string">
+			<xsd:annotation>
+				<xsd:documentation><![CDATA[
+	Reference to a ResponseErrorHandler to be used by in case of any error
+					]]></xsd:documentation>
+				<xsd:appinfo>
+					<tool:annotation kind="ref">
+						<tool:expected-type
+							type="org.springframework.integration.apns.ErrorHandler" />
+					</tool:annotation>
+				</xsd:appinfo>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="order" type="xsd:string">
+			<xsd:annotation>
+				<xsd:documentation><![CDATA[
+	Specifies the order for invocation when this adapter is connected as a subscriber to a SubscribableChannel.
+					]]></xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="concurrent-connections" type="xsd:string">
+			<xsd:annotation>
+				<xsd:documentation><![CDATA[
+	Number of concurrent connections
+					]]></xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+
+		<xsd:attribute name="header-mapper" type="xsd:string">
+			<xsd:annotation>
+				<xsd:appinfo>
+					<tool:annotation kind="ref">
+						<tool:expected-type
+							type="org.springframework.integration.mapping.HeaderMapper" />
+					</tool:annotation>
+				</xsd:appinfo>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:attributeGroup>
+
+</xsd:schema>
