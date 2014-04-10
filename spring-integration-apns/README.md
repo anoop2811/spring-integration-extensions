@@ -27,8 +27,11 @@ Currently this extension supports the following adapters and their current statu
 		key-store-password="test123" is-sandbox="false" channel="test-input" />
 ```
 The attributes are as described below:
+
 	certificate-path	- The path to the certificate file that is received suring registration through the apple developer portal
+
 	key-store-password	- The certificate password
+
 	is-sandbox			- Indicates if this push notification is to go through apple's sandbox environment
 
 *Spring Integration* messages sent to the outbound adapter should have the following header
