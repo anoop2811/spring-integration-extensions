@@ -1,134 +1,57 @@
-Spring Integration SpringIntegrationApns Adapter
+Spring Integration Extension for Apple push notification
 =================================================
 
-Welcome to the *Spring Integration Adapter Template*. This template is meant as a starting point for new *Spring Integration* Adapters. This template provides the following components:
+# Introduction
 
-* Outbound Channel Adapter
-* Outbound Gateway
-* Inbound Channel Adapter
+## Apple push notification service
+With the maturing of the mobile platform, the need to connect with the consumers is ever increasing. This could be a notification event for say a server outage or maybe even a first class application feature like sending offers etc. Apple has the iphone and ipad as part of their mobility platforms and provide for the creator of a mobile app to interact with their users using the Apple push notification service or APNS in short. However there are steps that the application creator would have to perform to be able to communicate with a device. More details about the apple push notification can be gathered by visiting [https://developer.apple.com/library/ios/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/Chapters/ApplePushService.html]
 
-However, this template may also be useful in order to create other Spring Integration extensions containing for example *Transformers*, *Marshallers* etc.
+*Spring Integration Extension for APNS* provides Spring Integration adapters for the various services provided by the Apple push notification service and uses Pushy framework internally to do the same. For more information regarding Pushy, please visit [https://github.com/relayrides/pushy/tree/pushy-0.2]. 
 
-# FAQ
+## Spring Integration's extensions to APNS
 
-This section provides some additional information, that may help you to create better *Spring Integration* components. 
+Currently this extension supports the following adapters and their current status is as mentioned below:
 
-## How are the packages structured?
+* Outbound Channel Adapter (Status: Testing underway)
+* Outbound Gateway (Status: Testing underway)
+* Feedback inbound Channel Adapter (Status: In progress)
 
-### Base package
+#Adapters
 
-In many instances, the base package may not contain any classes at all. However, if you define custom *Spring Integration* message headers or provide module specific exceptions types, this package will be a good choice to store those types of classes.
+## Outbound Channel Adapter
+### Example Usage:
+```xml
 
-### config.xml
+	<int-apns:outbound-channel-adapter
+		certificate-path="src/test/resources/test-cert.p12"
+		key-store-password="test123" is-sandbox="false" channel="test-input" />
+```
+The attributes are as described below:
+	certificate-path	- The path to the certificate file that is received suring registration through the apple developer portal
+	key-store-password	- The certificate password
+	is-sandbox			- Indicates if this push notification is to go through apple's sandbox environment
 
-Parser classes for the XML Namespace support go into this package.
+*Spring Integration* messages sent to the outbound adapter should have the following header
+	apns_deviceToken		      -  A device token is an opaque identifier of a device that APNs gives to the device when it first connects with it
 
-### config.annotation
+The message could have the following optional headers:
+	apns_badgeCount			      - This is the badge count or the number that would show up against your application icon on the iphone or ipad.
+	apns_soundFileName		      - This is the name of the sound file packaged with the app that would be played when a notification is received on the phone/tablet
+	apns_launchImageName	      - The name of the image file in the application bundle that would be used as the launch image when the user taps the action button or moves the action slider.
+	apns_showActionButton		  - A boolean flag to determine if an action button should be shown on a delivered alert.
+	apns_localizedActionButtonKey - The key of a string in the receiving app's localized string list to be used as the label of the action button
 
-If your *Spring Integration* module provides custom annotations, the relevant configuration classes go into this package.
+The *payload* of the spring integration message has to be a String and the total size of the payload and headers mentioned above that gets pushed as to Apple should not exceed 256 bytes	
+	
+## Outbound Channel Adapter
+Work in progress
 
-### config.xml
-
-Used for common configuration classes.
-
-### core
-
-Contains the core component logic that is typically shared across the various components you define.
-
-### inbound
-
-Contains classes for inbound adapters.
-
-### outbound
-
-Contains classes for outbound adapters.
-
-### support
-
-Contains for example utility classes.
-
-## I need to add AOP Advices to my adapters
-
-Use *FactoryBeans* that wrap your adapter. See the *Spring Integration JPA Adapter* for an example.
-
-## How do I provide documentation for my custom modules?
-
-We typically recommend 2 approaches:
-
-* DocBook
-* Markdown formatted README.md files
-
-### DocBook
-
-Traditionally, *Spring* projects have relied on DocBook to provide documentation. By conforming to the DocBook XML syntax, you are easily able to generate PDF and HTML documentation. The adapter template provide DocBook support out of the box. You can find preliminary stubbed out documentation under *src/reference/docbook*. In order to build the reference documentation (results will be in `build/reference`), execute:
-
-    ./gradlew reference
-
-### Markdown formatted README.md files
-
-If you use *GitHub* for the hosting of your projects, you may also consider using its sophisticated Markdown support. GitHub will provide a nice rendering of your readme files right in the source code repository.
-
-## Can I install the artifacts of my adapter to the local Maven cache?
-
-Yes. To build and install jars into your local Maven cache, please execute:
-
-    ./gradlew install
-
-Please also review the settings in **publish-maven.gradle**. Within that file you can specify various POM.xml-specific meta-data such as licensing, developer and scm information.
-
-# Building
-
-The template uses *Gradle* to compile and build the project. For convenience it uses the *Gradle* wrapper, which is provided as part of the template. If you are on a unix-based file system, please ensure that `gradlew` is executable. If not, please execute:
-
-	chmod +x gradlew
-
-If you encounter out of memory errors during the build, increase available the heap and permgen for *Gradle*:
-
-    export GRADLE_OPTS='-XX:MaxPermSize=1024m -Xmx1024m'
-
-To build and install jars into your local Maven cache:
-
-    ./gradlew install
-
-To build api Javadoc (results will be in `build/api`):
-
-    ./gradlew api
-
-To build reference documentation (results will be in `build/reference`):
-
-    ./gradlew reference
-
-To build complete distribution including `-dist`, `-docs`, and `-schema` zip files (results will be in `build/distributions`)
-
-    ./gradlew dist
-
-# IDE Support
-
-While your custom Spring Integration Adapter is initially created with SpringSource Tool Suite, you in fact end up with a Gradle-based project. As such, the created project can be imported into other IDEs as well.
-
-## Using SpringSource Tool Suite
-
-Gradle projects can be directly imported into STS. But please make sure that you have the Gradle support installed.
-
-## Using Plain Eclipse
-
-To generate Eclipse metadata (*.classpath* and *.project* files), do the following:
-
-    ./gradlew eclipse
-
-Once complete, you may then import the project into Eclipse as usual:
-
- *File -> Import -> Existing projects into workspace*
-
-Browse to the root directory of the project and it should import free of errors.
-
-## Using IntelliJ IDEA
-
-To generate IDEA metadata (.iml and .ipr files), do the following:
-
-    ./gradlew idea
+## Feedback Inbound Adapter
+Work in progress
 
 # Further Resources
+* [Apple Push Notification Service] : https://developer.apple.com/library/ios/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/Chapters/ApplePushService.html
+* [Pushy] : https://github.com/relayrides/pushy/tree/pushy-0.2
 
 ## Getting support
 

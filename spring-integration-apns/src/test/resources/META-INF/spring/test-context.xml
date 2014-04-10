@@ -14,6 +14,10 @@
 	<int-apns:outbound-channel-adapter
 		certificate-path="src/test/resources/com.clairmail.bankoftrust-production.p12"
 		key-store-password="clairmail" is-sandbox="false" channel="test-input" />
+		
+	<int-apns:outbound-channel-adapter certificate-path="" key-store-password="">
+		
+	</int-apns:outbound-channel-adapter>
 
 </beans>
 
