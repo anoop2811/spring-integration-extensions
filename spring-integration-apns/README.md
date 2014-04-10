@@ -4,9 +4,9 @@ Spring Integration Extension for Apple push notification
 # Introduction
 
 ## Apple push notification service
-With the maturing of the mobile platform, the need to connect with the consumers is ever increasing. This could be a notification event for say a server outage or maybe even a first class application feature like sending offers etc. Apple has the iphone and ipad as part of their mobility platforms and provide for the creator of a mobile app to interact with their users using the Apple push notification service or APNS in short. However there are steps that the application creator would have to perform to be able to communicate with a device. More details about the apple push notification can be gathered by visiting [https://developer.apple.com/library/ios/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/Chapters/ApplePushService.html]
+With the maturing of the mobile platform, the need to connect with the consumers is ever increasing. This could be a notification event for say a server outage or maybe even a first class application feature like sending offers etc. Apple has the iphone and ipad as part of their mobility platforms and provide for the creator of a mobile app to interact with their users using the Apple push notification service or APNS in short. However there are steps that the application creator would have to perform to be able to communicate with a device. More details about the apple push notification can be gathered by visiting the apple developers page
 
-*Spring Integration Extension for APNS* provides Spring Integration adapters for the various services provided by the Apple push notification service and uses Pushy framework internally to do the same. For more information regarding Pushy, please visit [https://github.com/relayrides/pushy/tree/pushy-0.2]. 
+*Spring Integration Extension for APNS* provides Spring Integration adapters for the various services provided by the Apple push notification service and uses Pushy framework internally to do the same. For more information regarding Pushy, please visit their github page. 
 
 ## Spring Integration's extensions to APNS
 
