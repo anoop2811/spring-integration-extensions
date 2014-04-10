@@ -32,13 +32,19 @@ The attributes are as described below:
 	is-sandbox			- Indicates if this push notification is to go through apple's sandbox environment
 
 *Spring Integration* messages sent to the outbound adapter should have the following header
+
 	apns_deviceToken		      -  A device token is an opaque identifier of a device that APNs gives to the device when it first connects with it
 
 The message could have the following optional headers:
+
 	apns_badgeCount			      - This is the badge count or the number that would show up against your application icon on the iphone or ipad.
+
 	apns_soundFileName		      - This is the name of the sound file packaged with the app that would be played when a notification is received on the phone/tablet
+
 	apns_launchImageName	      - The name of the image file in the application bundle that would be used as the launch image when the user taps the action button or moves the action slider.
+
 	apns_showActionButton		  - A boolean flag to determine if an action button should be shown on a delivered alert.
+
 	apns_localizedActionButtonKey - The key of a string in the receiving app's localized string list to be used as the label of the action button
 
 The *payload* of the spring integration message has to be a String and the total size of the payload and headers mentioned above that gets pushed as to Apple should not exceed 256 bytes	
