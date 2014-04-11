@@ -32,7 +32,7 @@ The attributes are as described below:
 
 	key-store-password	- The certificate password
 
-	is-sandbox			- Indicates if this push notification is to go through apple's sandbox environment
+	is-sandbox			- Indicates if this push notification is to go through apple's sandbox environment. Defaults to false
 
 *Spring Integration* messages sent to the outbound adapter should have the following header
 
@@ -59,8 +59,8 @@ Work in progress
 Work in progress
 
 # Further Resources
-* [Apple Push Notification Service] : https://developer.apple.com/library/ios/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/Chapters/ApplePushService.html
-* [Pushy] : https://github.com/relayrides/pushy/tree/pushy-0.2
+* [Apple Push Notification Service][]
+* [Pushy][]
 
 ## Getting support
 
@@ -88,3 +88,5 @@ For more information, please also don't forget to visit the [Spring Integration]
 [Spring Integration Dsl Scala]: https://github.com/SpringSource/spring-integration-dsl-scala
 [Spring Integration Pattern Catalog]: https://github.com/SpringSource/spring-integration-pattern-catalog
 [Stack Overflow]: http://stackoverflow.com/faq
+[Apple Push Notification Service]: https://developer.apple.com/library/ios/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/Chapters/ApplePushService.html
+[Pushy]: https://github.com/relayrides/pushy/tree/pushy-0.2

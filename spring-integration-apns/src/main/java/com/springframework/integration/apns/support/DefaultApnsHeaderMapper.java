@@ -13,7 +13,6 @@ import com.springframework.integration.apns.core.ApnsHeaders;
 public class DefaultApnsHeaderMapper implements
 		HeaderMapper<Object> {
 	
-	@Override
 	public void fromHeaders(MessageHeaders headers, Object target) {
 		Assert.isTrue(target instanceof ApnsPayloadBuilder,
 				"the default header mapper requires a target of ApnsPayloadBuilder"); 
@@ -68,7 +67,7 @@ public class DefaultApnsHeaderMapper implements
 		}
 	}
 
-	@Override
+	
 	public Map<String, Object> toHeaders(Object source) {
 		Assert.isTrue(source instanceof ExpiredToken,
 				"the default header mapper requires the source to be of type ExpiredToken"); 

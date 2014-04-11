@@ -19,6 +19,65 @@ public class ApnsPollingFeedbackChannelAdapter extends IntegrationObjectSupport
 		DisposableBean {
 
 	private String certificatePath;
+	public String getCertificatePath() {
+		return certificatePath;
+	}
+
+
+	public void setCertificatePath(String certificatePath) {
+		this.certificatePath = certificatePath;
+	}
+
+
+	public String getKeyStorePassword() {
+		return keyStorePassword;
+	}
+
+
+	public void setKeyStorePassword(String keyStorePassword) {
+		this.keyStorePassword = keyStorePassword;
+	}
+
+
+	public boolean isTlsRequired() {
+		return tlsRequired;
+	}
+
+
+	public void setTlsRequired(boolean tlsRequired) {
+		this.tlsRequired = tlsRequired;
+	}
+
+
+	public boolean isSandbox() {
+		return isSandbox;
+	}
+
+
+	public void setIsSandbox(boolean isSandbox) {
+		this.isSandbox = isSandbox;
+	}
+
+
+	public int getConcurrentConnections() {
+		return concurrentConnections;
+	}
+
+
+	public void setConcurrentConnections(int concurrentConnections) {
+		this.concurrentConnections = concurrentConnections;
+	}
+
+
+	public PushManager<SimpleApnsPushNotification> getPushManager() {
+		return pushManager;
+	}
+
+
+	public void setPushManager(PushManager<SimpleApnsPushNotification> pushManager) {
+		this.pushManager = pushManager;
+	}
+
 	private String keyStorePassword;
 	private boolean tlsRequired = true;
 	private boolean isSandbox = false;
@@ -33,13 +92,13 @@ public class ApnsPollingFeedbackChannelAdapter extends IntegrationObjectSupport
 		super.onInit();
 	}
 
-	@Override
+
 	public Message<List<ExpiredToken>> receive() {
 		List<ExpiredToken> expiredTokens = null;
 		try {
 			expiredTokens = pushManager.getExpiredTokens();
 		} catch (InterruptedException e) {
-			e.printStackTrace();
+			throw new IllegalStateException("Caught exception while retrieving expired tokens", e);
 		}
 		if (expiredTokens == null) {
 			return null;
@@ -47,7 +106,7 @@ public class ApnsPollingFeedbackChannelAdapter extends IntegrationObjectSupport
 		return MessageBuilder.withPayload(expiredTokens).build();
 	}
 
-	@Override
+
 	public void destroy() throws Exception {
 		pushManager.shutdown();
 

@@ -15,10 +15,12 @@
  */
 package com.springframework.integration.apns.config.xml;
 
+import org.springframework.beans.BeanMetadataElement;
 import org.springframework.beans.factory.support.AbstractBeanDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.xml.ParserContext;
 import org.springframework.integration.config.xml.AbstractChannelAdapterParser;
+import org.springframework.integration.config.xml.AbstractPollingInboundChannelAdapterParser;
 import org.springframework.integration.config.xml.IntegrationNamespaceUtils;
 import org.w3c.dom.Element;
 
@@ -33,22 +35,32 @@ import com.springframework.integration.apns.inbound.ApnsPollingFeedbackChannelAd
  * @since 1.0
  *
  */
-public class ApnsFeedbackChannelAdapterParser extends AbstractChannelAdapterParser{
+public class ApnsFeedbackChannelAdapterParser extends AbstractPollingInboundChannelAdapterParser{
 
 
-	protected AbstractBeanDefinition doParse(Element element, ParserContext parserContext, String channelName) {
+//	protected AbstractBeanDefinition doParse(Element element, ParserContext parserContext, String channelName) {
+//		BeanDefinitionBuilder builder = BeanDefinitionBuilder.genericBeanDefinition(ApnsPollingFeedbackChannelAdapter.class);
+//		builder.addPropertyReference("outputChannel", channelName);
+//		
+//		//TODO: Allow to read multiple certificates from a directory and corresponding passwords
+//		IntegrationNamespaceUtils.setValueIfAttributeDefined(builder, element, "certificate-path");
+//		IntegrationNamespaceUtils.setValueIfAttributeDefined(builder, element, "certificate-path");
+//		IntegrationNamespaceUtils.setValueIfAttributeDefined(builder, element, "key-store-password");
+//		IntegrationNamespaceUtils.setValueIfAttributeDefined(builder, element, "is-sandbox");
+//		IntegrationNamespaceUtils.setValueIfAttributeDefined(builder, element, "concurrent-connections");
+//		return builder.getBeanDefinition();
+//	}
+
+	@Override
+	protected BeanMetadataElement parseSource(Element element,
+			ParserContext parserContext) {
 		BeanDefinitionBuilder builder = BeanDefinitionBuilder.genericBeanDefinition(ApnsPollingFeedbackChannelAdapter.class);
-		builder.addPropertyReference("outputChannel", channelName);
-		
 		//TODO: Allow to read multiple certificates from a directory and corresponding passwords
 		IntegrationNamespaceUtils.setValueIfAttributeDefined(builder, element, "certificate-path");
 		IntegrationNamespaceUtils.setValueIfAttributeDefined(builder, element, "certificate-path");
 		IntegrationNamespaceUtils.setValueIfAttributeDefined(builder, element, "key-store-password");
 		IntegrationNamespaceUtils.setValueIfAttributeDefined(builder, element, "is-sandbox");
 		IntegrationNamespaceUtils.setValueIfAttributeDefined(builder, element, "concurrent-connections");
-		IntegrationNamespaceUtils.setReferenceIfAttributeDefined(builder, element, "error-channel");
-		IntegrationNamespaceUtils.setReferenceIfAttributeDefined(builder, element, "channel");
-		IntegrationNamespaceUtils.setReferenceIfAttributeDefined(builder, element, "header-mapper");
 		return builder.getBeanDefinition();
 	}
 }

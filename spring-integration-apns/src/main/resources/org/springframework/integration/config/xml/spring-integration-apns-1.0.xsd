@@ -29,6 +29,9 @@
 			</xsd:documentation>
 		</xsd:annotation>
 		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="integration:poller" minOccurs="0" maxOccurs="1"/>
+			</xsd:sequence>
 			<xsd:attributeGroup ref="integration:channelAdapterAttributes" />
 			<xsd:attributeGroup ref="apnsCommonAttributes" />
 			<xsd:attribute name="send-timeout" type="xsd:string">
@@ -64,10 +67,10 @@
 			</xsd:documentation>
 		</xsd:annotation>
 		<xsd:complexType>
-			<xsd:choice minOccurs="0" maxOccurs="1">
+			<xsd:sequence>
 				<xsd:element name="request-handler-advice-chain" type="integration:adviceChainType"
 					minOccurs="0" maxOccurs="1" />
-			</xsd:choice>
+			</xsd:sequence>
 			<xsd:attribute name="send-timeout" type="xsd:string">
 				<xsd:annotation>
 					<xsd:documentation>
@@ -95,9 +98,9 @@
 			</xsd:annotation>
 			<xsd:complexContent>
 				<xsd:extension base="gatewayType">
-					<xsd:choice minOccurs="0" maxOccurs="1">
+					<xsd:sequence>
 						<xsd:element name="request-handler-advice-chain" type="integration:adviceChainType" minOccurs="0" maxOccurs="1" />
-					</xsd:choice>
+					</xsd:sequence>
 					<xsd:attribute name="request-channel" type="xsd:string">
 						<xsd:annotation>
 							<xsd:appinfo>

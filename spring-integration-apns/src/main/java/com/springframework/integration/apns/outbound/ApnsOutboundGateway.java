@@ -88,7 +88,7 @@ public class ApnsOutboundGateway  extends AbstractReplyProducingMessageHandler i
 		} catch (IOException e) {
 			throw new IllegalStateException("Caught Exception while trying to start connection to the apns server", e);
 		}
-		super.onInit();
+		super.doInit();
 		
 	}
 
@@ -154,7 +154,7 @@ public class ApnsOutboundGateway  extends AbstractReplyProducingMessageHandler i
 		return isSandbox;
 	}
 
-	public void setSandbox(boolean isSandbox) {
+	public void setIsSandbox(boolean isSandbox) {
 		this.isSandbox = isSandbox;
 	}
 

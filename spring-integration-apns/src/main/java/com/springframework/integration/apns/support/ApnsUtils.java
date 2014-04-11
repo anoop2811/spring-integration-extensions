@@ -70,7 +70,6 @@ public final class ApnsUtils {
 		} finally {
 			IOUtils.closeQuietly(keystoreInputStream);
 			return pushManager;
-			
 		}
 
 	}
