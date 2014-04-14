@@ -1,4 +1,4 @@
-package com.springframework.integration.apns.core;
+package org.springframework.integration.apns.core;
 
 public class ApnsNotificationException  extends RuntimeException {
 

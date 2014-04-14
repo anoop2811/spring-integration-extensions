@@ -13,18 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.springframework.integration.apns.config.xml;
+package org.springframework.integration.apns.config.xml;
 
 import org.springframework.beans.BeanMetadataElement;
 import org.springframework.beans.factory.support.AbstractBeanDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.xml.ParserContext;
+import org.springframework.integration.apns.inbound.ApnsPollingFeedbackChannelAdapter;
 import org.springframework.integration.config.xml.AbstractChannelAdapterParser;
 import org.springframework.integration.config.xml.AbstractPollingInboundChannelAdapterParser;
 import org.springframework.integration.config.xml.IntegrationNamespaceUtils;
 import org.w3c.dom.Element;
-
-import com.springframework.integration.apns.inbound.ApnsPollingFeedbackChannelAdapter;
 
 
 
@@ -38,18 +37,7 @@ import com.springframework.integration.apns.inbound.ApnsPollingFeedbackChannelAd
 public class ApnsFeedbackChannelAdapterParser extends AbstractPollingInboundChannelAdapterParser{
 
 
-//	protected AbstractBeanDefinition doParse(Element element, ParserContext parserContext, String channelName) {
-//		BeanDefinitionBuilder builder = BeanDefinitionBuilder.genericBeanDefinition(ApnsPollingFeedbackChannelAdapter.class);
-//		builder.addPropertyReference("outputChannel", channelName);
-//		
-//		//TODO: Allow to read multiple certificates from a directory and corresponding passwords
-//		IntegrationNamespaceUtils.setValueIfAttributeDefined(builder, element, "certificate-path");
-//		IntegrationNamespaceUtils.setValueIfAttributeDefined(builder, element, "certificate-path");
-//		IntegrationNamespaceUtils.setValueIfAttributeDefined(builder, element, "key-store-password");
-//		IntegrationNamespaceUtils.setValueIfAttributeDefined(builder, element, "is-sandbox");
-//		IntegrationNamespaceUtils.setValueIfAttributeDefined(builder, element, "concurrent-connections");
-//		return builder.getBeanDefinition();
-//	}
+
 
 	@Override
 	protected BeanMetadataElement parseSource(Element element,

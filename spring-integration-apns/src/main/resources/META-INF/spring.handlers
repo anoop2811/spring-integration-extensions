@@ -1,1 +1,1 @@
-http\://www.springframework.org/schema/integration/apns=com.springframework.integration.apns.config.xml.ApnsNamespaceHandler
+http\://www.springframework.org/schema/integration/apns=org.springframework.integration.apns.config.xml.ApnsNamespaceHandler

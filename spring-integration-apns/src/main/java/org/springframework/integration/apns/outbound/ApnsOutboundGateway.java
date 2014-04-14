@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.springframework.integration.apns.outbound;
+package org.springframework.integration.apns.outbound;
 
 import java.io.IOException;
 import java.security.KeyStoreException;
@@ -23,6 +23,10 @@ import java.security.cert.CertificateException;
 
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.integration.Message;
+import org.springframework.integration.apns.core.ApnsHeaders;
+import org.springframework.integration.apns.core.DefaultApnsNotificationListener;
+import org.springframework.integration.apns.support.ApnsUtils;
+import org.springframework.integration.apns.support.DefaultApnsHeaderMapper;
 import org.springframework.integration.handler.AbstractReplyProducingMessageHandler;
 import org.springframework.integration.mapping.HeaderMapper;
 import org.springframework.integration.support.MessageBuilder;
@@ -32,10 +36,6 @@ import com.relayrides.pushy.apns.RejectedNotificationListener;
 import com.relayrides.pushy.apns.util.ApnsPayloadBuilder;
 import com.relayrides.pushy.apns.util.SimpleApnsPushNotification;
 import com.relayrides.pushy.apns.util.TokenUtil;
-import com.springframework.integration.apns.core.ApnsHeaders;
-import com.springframework.integration.apns.core.DefaultApnsNotificationListener;
-import com.springframework.integration.apns.support.ApnsUtils;
-import com.springframework.integration.apns.support.DefaultApnsHeaderMapper;
 
 
 /**
@@ -44,13 +44,8 @@ import com.springframework.integration.apns.support.DefaultApnsHeaderMapper;
  * then a reply Message will be generated with a payload as 'ENQUEUED'.This is because the
  * Pushy framework uses NIO asynch communication and hence once the push notification is enqueued
  * into the sending is managed in another thread. Apple does not give any response if the message
- * was successful, but would do so if there was an error in the sending. The sending error can be
- * trapped by using an instance of type {@link RejectedNotificationListener}. A default
- * implementation that throws an exception with the 
- * payload will contain the response status as an instance of the {@link HttpStatus} enum.
- * When there is a response body, the {@link HttpStatus} enum instance will instead be
- * copied to the MessageHeaders of the reply. In both cases, the response headers will
- * be mapped to the reply Message's headers by this handler's {@link HeaderMapper} instance.
+ * was successful, but would do so if there was an error in the sending. The sending error is
+ * trapped by using a default instance of type {@link RejectedNotificationListener}. 
  *
  * @author Anoop Gopalakrishnan
  * @since 1.0

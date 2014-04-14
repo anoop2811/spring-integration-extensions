@@ -1,10 +1,11 @@
-package com.springframework.integration.apns.inbound;
+package org.springframework.integration.apns.inbound;
 
 import java.util.List;
 
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.integration.Message;
+import org.springframework.integration.apns.support.ApnsUtils;
 import org.springframework.integration.context.IntegrationObjectSupport;
 import org.springframework.integration.core.MessageSource;
 import org.springframework.integration.support.MessageBuilder;
@@ -12,7 +13,6 @@ import org.springframework.integration.support.MessageBuilder;
 import com.relayrides.pushy.apns.ExpiredToken;
 import com.relayrides.pushy.apns.PushManager;
 import com.relayrides.pushy.apns.util.SimpleApnsPushNotification;
-import com.springframework.integration.apns.support.ApnsUtils;
 
 public class ApnsPollingFeedbackChannelAdapter extends IntegrationObjectSupport
 		implements MessageSource<List<ExpiredToken>>, InitializingBean,

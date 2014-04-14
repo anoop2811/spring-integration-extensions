@@ -1,14 +1,14 @@
-package com.springframework.integration.apns.support;
+package org.springframework.integration.apns.support;
 
 import java.util.Map;
 
 import org.springframework.integration.MessageHeaders;
+import org.springframework.integration.apns.core.ApnsHeaders;
 import org.springframework.integration.mapping.HeaderMapper;
 import org.springframework.util.Assert;
 
 import com.relayrides.pushy.apns.ExpiredToken;
 import com.relayrides.pushy.apns.util.ApnsPayloadBuilder;
-import com.springframework.integration.apns.core.ApnsHeaders;
 
 public class DefaultApnsHeaderMapper implements
 		HeaderMapper<Object> {

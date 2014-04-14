@@ -13,17 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.springframework.integration.apns.config.xml;
+package org.springframework.integration.apns.config.xml;
 
 import org.springframework.beans.factory.support.AbstractBeanDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.xml.ParserContext;
+import org.springframework.integration.apns.outbound.ApnsOutboundChannelAdapter;
+import org.springframework.integration.apns.outbound.ApnsOutboundGateway;
 import org.springframework.integration.config.xml.AbstractOutboundChannelAdapterParser;
 import org.springframework.integration.config.xml.IntegrationNamespaceUtils;
 import org.w3c.dom.Element;
-
-import com.springframework.integration.apns.outbound.ApnsOutboundChannelAdapter;
-import com.springframework.integration.apns.outbound.ApnsOutboundGateway;
 
 /**
  * The parser for the Apns Outbound Channel Adapter.

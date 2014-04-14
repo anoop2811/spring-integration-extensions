@@ -1,8 +1,12 @@
-package com.springframework.integration.apns.outbound;
+package org.springframework.integration.apns.outbound;
 
 import java.io.IOException;
 
 import org.springframework.integration.Message;
+import org.springframework.integration.apns.core.ApnsHeaders;
+import org.springframework.integration.apns.core.DefaultApnsNotificationListener;
+import org.springframework.integration.apns.support.ApnsUtils;
+import org.springframework.integration.apns.support.DefaultApnsHeaderMapper;
 import org.springframework.integration.handler.AbstractMessageHandler;
 import org.springframework.integration.mapping.HeaderMapper;
 import org.springframework.util.Assert;
@@ -11,10 +15,6 @@ import com.relayrides.pushy.apns.PushManager;
 import com.relayrides.pushy.apns.util.ApnsPayloadBuilder;
 import com.relayrides.pushy.apns.util.SimpleApnsPushNotification;
 import com.relayrides.pushy.apns.util.TokenUtil;
-import com.springframework.integration.apns.core.ApnsHeaders;
-import com.springframework.integration.apns.core.DefaultApnsNotificationListener;
-import com.springframework.integration.apns.support.ApnsUtils;
-import com.springframework.integration.apns.support.DefaultApnsHeaderMapper;
 
 public class ApnsOutboundChannelAdapter extends AbstractMessageHandler{
 

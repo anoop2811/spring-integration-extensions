@@ -84,70 +84,7 @@
 		</xsd:complexType>
 	</xsd:element>
 	
-	<xsd:element name="outbound-gateway">
-		<xsd:complexType>
-			<xsd:annotation>
-				<xsd:documentation>
-					Defines an outbound APNS Messaging Gateway. Since this uses Pushy as the underlying framework
-					and NIO as the transport mechanism as soon as a message is enqueued for delivery, a reply is
-					sent with status as 'ENQUEUED'. In case there is an error in the actual sending of the message
-					an exception is thrown with same headers and the client could use the same to mark the status
-					accordingly as failed. This is because Apple servers do not send a response if the sending was
-					successful.
-				</xsd:documentation>
-			</xsd:annotation>
-			<xsd:complexContent>
-				<xsd:extension base="gatewayType">
-					<xsd:sequence>
-						<xsd:element name="request-handler-advice-chain" type="integration:adviceChainType" minOccurs="0" maxOccurs="1" />
-					</xsd:sequence>
-					<xsd:attribute name="request-channel" type="xsd:string">
-						<xsd:annotation>
-							<xsd:appinfo>
-								<tool:annotation kind="ref">
-									<tool:expected-type type="org.springframework.integration.MessageChannel" />
-								</tool:annotation>
-							</xsd:appinfo>
-						</xsd:annotation>
-					</xsd:attribute>
-					<xsd:attribute name="header-mapper" type="xsd:string">
-						<xsd:annotation>
-							<xsd:appinfo>
-								<tool:annotation kind="ref">
-									<tool:expected-type type="org.springframework.integration.mapping.HeaderMapper" />
-								</tool:annotation>
-							</xsd:appinfo>
-						</xsd:annotation>
-					</xsd:attribute>
-					<xsd:attribute name="auto-startup" type="xsd:string" />
-					<xsd:attribute name="reply-timeout" type="xsd:string">
-						<xsd:annotation>
-							<xsd:documentation><![CDATA[
-								Allows you to specify how long this gateway will wait for
-								the reply message to be sent successfully to the reply channel
-								before throwing an exception. This attribute only applies when the
-								channel might block, for example when using a bounded queue channel that
-								is currently full.
 
-								Also, keep in mind that when sending to a DirectChannel, the
-								invocation will occur in the sender's thread. Therefore,
-								the failing of the send operation may be caused by other
-								components further downstream.
-
-								The "reply-timeout" attribute maps to the "sendTimeout" property of the
-								underlying 'MessagingTemplate' instance (org.springframework.integration.core.MessagingTemplate).
-
-								The attribute will default, if not specified, to '-1', meaning that
-								by default, the Gateway will wait indefinitely. The value is
-								specified in milliseconds.
-							]]></xsd:documentation>
-						</xsd:annotation>
-					</xsd:attribute>
-				</xsd:extension>
-			</xsd:complexContent>
-		</xsd:complexType>
-	</xsd:element>
-	
 
 
 	<xsd:attributeGroup name="apnsCommonAttributes">

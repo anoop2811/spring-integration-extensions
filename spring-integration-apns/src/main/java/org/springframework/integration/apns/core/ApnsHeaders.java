@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.springframework.integration.apns.core;
+package org.springframework.integration.apns.core;
 
 /**
  * Apple push adapter specific message headers.

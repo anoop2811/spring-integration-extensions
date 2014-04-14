@@ -1,4 +1,4 @@
-package com.springframework.integration.apns.core;
+package org.springframework.integration.apns.core;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

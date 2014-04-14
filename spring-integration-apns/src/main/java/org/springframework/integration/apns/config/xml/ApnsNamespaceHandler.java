@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.springframework.integration.apns.config.xml;
+package org.springframework.integration.apns.config.xml;
 
 import org.springframework.integration.config.xml.AbstractIntegrationNamespaceHandler;
 
@@ -31,7 +31,6 @@ public class ApnsNamespaceHandler extends AbstractIntegrationNamespaceHandler {
 	 */
 	public void init() {
 		this.registerBeanDefinitionParser("feedback-channel-adapter",  new ApnsFeedbackChannelAdapterParser());
-		this.registerBeanDefinitionParser("outbound-gateway", new ApnsOutboundGatewayParser());
 		this.registerBeanDefinitionParser("outbound-channel-adapter", new ApnsOutboundChannelAdapterParser());
 	}
 }
