@@ -24,7 +24,8 @@ Currently this extension supports the following adapters and their current statu
 
 	<int-apns:outbound-channel-adapter
 		certificate-path="src/test/resources/test-cert.p12"
-		key-store-password="test123" is-sandbox="false" channel="test-input" />
+		key-store-password="test123" is-sandbox="false" channel="test-input">
+	</int-apns:outbound-channel-adapter>
 ```
 The attributes are as described below:
 
@@ -52,11 +53,19 @@ The message could have the following optional headers:
 
 The *payload* of the spring integration message has to be a String and the total size of the payload and headers mentioned above that gets pushed as to Apple should not exceed 256 bytes	
 	
-## Outbound Channel Adapter
-Work in progress
-
 ## Feedback Inbound Adapter
-Work in progress
+Apple provides a mechnism to collect all devices that have reportedly reported failed delivery attempts. The sender can then manage or blacklist those device tokens so that future sending can be terminated to not overwhelm the sending system. Spring Integration provides a poller inbound service using which the feedback service can be polled at regular intervals
+to gather such tokens and manage as needed. An example usage is as shown below
+
+```xml
+
+	<int-apns:feedback-channel-adapter id="test"
+		certificate-path="src/test/resources/test-cert.p12" key-store-password="test123" channel="output-channel">
+		<int:poller cron="*/10 * * * * *"></int:poller>
+	</int-apns:feedback-channel-adapter>
+```
+
+The output payload is a list of type *com.relayrides.pushy.apns.ExpiredTokens*
 
 # Further Resources
 * [Apple Push Notification Service][]
