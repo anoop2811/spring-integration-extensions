@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:int-apns="http://www.springframework.org/schema/integration/apns"
+	xmlns:int="http://www.springframework.org/schema/integration"
+	xsi:schemaLocation="http://www.springframework.org/schema/integration/apns http://www.springframework.org/schema/integration/spring-integration-apns/spring-integration-apns.xsd
+		http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration-3.0.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<int:channel id="out">
+		<int:queue capacity="1000" />
+	</int:channel>
+	
+	
+	<int-apns:feedback-channel-adapter certificate-path="src/test/resources/mock-cert.p12" key-store-password="clairmail" channel="out" id="apnsFeedbackAdapter">
+		<int:poller cron="*/10 * * * * *"></int:poller>
+	</int-apns:feedback-channel-adapter>
+
+</beans>

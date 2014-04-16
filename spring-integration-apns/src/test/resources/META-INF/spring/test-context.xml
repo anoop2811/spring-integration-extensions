@@ -10,14 +10,22 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
 	<int:channel id="test-input" />
-
+ 
 	<int-apns:outbound-channel-adapter
-		certificate-path="src/test/resources/com.clairmail.bankoftrust-production.p12"
-		key-store-password="clairmail" is-sandbox="false" channel="test-input" />
-		
-	<int-apns:outbound-channel-adapter certificate-path="" key-store-password="">
-		
-	</int-apns:outbound-channel-adapter>
+		certificate-path="src/test/resources/mock-cert.p12"
+		key-store-password="clairmail" is-sandbox="false" channel="test-input">
+	</int-apns:outbound-channel-adapter> 
+
+	<int-apns:feedback-channel-adapter id="test"
+		certificate-path="src/test/resources/mock-cert.p12" key-store-password="clairmail" channel="output-channel">
+		<int:poller cron="*/10 * * * * *"></int:poller>
+	</int-apns:feedback-channel-adapter>
+
+	<int:channel id="output-channel" />
+
+	<int:logging-channel-adapter channel="output-channel" level="ERROR" log-full-message="true" id="testLog"/>
+
+	
 
 </beans>
 

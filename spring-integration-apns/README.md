@@ -12,9 +12,8 @@ With the maturing of the mobile platform, the need to connect with the consumers
 
 Currently this extension supports the following adapters and their current status is as mentioned below:
 
-* Outbound Channel Adapter (Status: Testing underway)
-* Outbound Gateway (Status: Testing underway)
-* Feedback inbound Channel Adapter (Status: In progress)
+* Outbound Channel Adapter
+* Feedback inbound Channel Adapter
 
 #Adapters
 

@@ -18,7 +18,7 @@
  *
  */
 
-package com.springframework.integration.apns.config.xml;
+package org.springframework.integration.apns.config.xml;
 
 import javax.annotation.Resource;
 
@@ -26,12 +26,11 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.integration.Message;
 import org.springframework.integration.MessageChannel;
+import org.springframework.integration.apns.core.ApnsHeaders;
 import org.springframework.integration.support.MessageBuilder;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
-import com.springframework.integration.apns.core.ApnsHeaders;
 
 /**
  * 
@@ -50,8 +49,8 @@ public class ApnsPushTest {
 	
 	@Test
 	public void testApplePush() throws InterruptedException {
-		Message message = createMessage();
-		channel.send(message);
+//		Message message = createMessage();
+//		channel.send(message);
 		Thread.sleep(2500000);
 	}
 
@@ -62,5 +61,7 @@ public class ApnsPushTest {
 				//.setHeader(ApnsHeaders.SHOW_ACTION_BUTTON, "false")
 				.build();
 	}
+	
+	
 
 }

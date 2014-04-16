@@ -67,10 +67,11 @@ public final class ApnsUtils {
 			pushManager = new PushManager<SimpleApnsPushNotification>(
 					apnsEnvironment, keyStore, keyStorePassword.toCharArray(),
 					concurrentConnections);
-		} finally {
+		}  finally {
 			IOUtils.closeQuietly(keystoreInputStream);
-			return pushManager;
+			
 		}
+		return pushManager;
 
 	}
 

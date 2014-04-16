@@ -1,4 +1,4 @@
 /**
- * Provides inbound Spring Integration SpringIntegrationApns components.
+ * Provides inbound Spring Integration Apns components for inbound operations.
  */
 package org.springframework.integration.apns.inbound;

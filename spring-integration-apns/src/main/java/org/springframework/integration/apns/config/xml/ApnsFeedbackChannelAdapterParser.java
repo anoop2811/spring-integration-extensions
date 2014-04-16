@@ -16,11 +16,9 @@
 package org.springframework.integration.apns.config.xml;
 
 import org.springframework.beans.BeanMetadataElement;
-import org.springframework.beans.factory.support.AbstractBeanDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.xml.ParserContext;
-import org.springframework.integration.apns.inbound.ApnsPollingFeedbackChannelAdapter;
-import org.springframework.integration.config.xml.AbstractChannelAdapterParser;
+import org.springframework.integration.apns.inbound.ApnsFeedbackInboundChannelAdapter;
 import org.springframework.integration.config.xml.AbstractPollingInboundChannelAdapterParser;
 import org.springframework.integration.config.xml.IntegrationNamespaceUtils;
 import org.w3c.dom.Element;
@@ -40,9 +38,9 @@ public class ApnsFeedbackChannelAdapterParser extends AbstractPollingInboundChan
 
 
 	@Override
-	protected BeanMetadataElement parseSource(Element element,
-			ParserContext parserContext) {
-		BeanDefinitionBuilder builder = BeanDefinitionBuilder.genericBeanDefinition(ApnsPollingFeedbackChannelAdapter.class);
+	protected BeanMetadataElement parseSource(Element element, ParserContext parserContext) {
+		BeanDefinitionBuilder builder = BeanDefinitionBuilder.genericBeanDefinition(ApnsFeedbackInboundChannelAdapter.class);
+		
 		//TODO: Allow to read multiple certificates from a directory and corresponding passwords
 		IntegrationNamespaceUtils.setValueIfAttributeDefined(builder, element, "certificate-path");
 		IntegrationNamespaceUtils.setValueIfAttributeDefined(builder, element, "certificate-path");
