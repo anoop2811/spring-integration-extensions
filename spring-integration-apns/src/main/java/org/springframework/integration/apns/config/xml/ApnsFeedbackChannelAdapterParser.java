@@ -18,7 +18,7 @@ package org.springframework.integration.apns.config.xml;
 import org.springframework.beans.BeanMetadataElement;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.xml.ParserContext;
-import org.springframework.integration.apns.inbound.ApnsFeedbackInboundChannelAdapter;
+import org.springframework.integration.apns.inbound.ApnsFeedbackPollingChannelAdapter;
 import org.springframework.integration.config.xml.AbstractPollingInboundChannelAdapterParser;
 import org.springframework.integration.config.xml.IntegrationNamespaceUtils;
 import org.w3c.dom.Element;
@@ -39,14 +39,19 @@ public class ApnsFeedbackChannelAdapterParser extends AbstractPollingInboundChan
 
 	@Override
 	protected BeanMetadataElement parseSource(Element element, ParserContext parserContext) {
-		BeanDefinitionBuilder builder = BeanDefinitionBuilder.genericBeanDefinition(ApnsFeedbackInboundChannelAdapter.class);
+		BeanDefinitionBuilder builder = BeanDefinitionBuilder.genericBeanDefinition(ApnsFeedbackPollingChannelAdapter.class);
 		
 		//TODO: Allow to read multiple certificates from a directory and corresponding passwords
 		IntegrationNamespaceUtils.setValueIfAttributeDefined(builder, element, "certificate-path");
-		IntegrationNamespaceUtils.setValueIfAttributeDefined(builder, element, "certificate-path");
+		IntegrationNamespaceUtils.setValueIfAttributeDefined(builder, element, "tls-required");
 		IntegrationNamespaceUtils.setValueIfAttributeDefined(builder, element, "key-store-password");
 		IntegrationNamespaceUtils.setValueIfAttributeDefined(builder, element, "is-sandbox");
 		IntegrationNamespaceUtils.setValueIfAttributeDefined(builder, element, "concurrent-connections");
+		IntegrationNamespaceUtils.setValueIfAttributeDefined(builder, element, "apns-host");
+		IntegrationNamespaceUtils.setValueIfAttributeDefined(builder, element, "apns-port");
+		IntegrationNamespaceUtils.setValueIfAttributeDefined(builder, element, "concurrent-connections");
+		IntegrationNamespaceUtils.setReferenceIfAttributeDefined(builder, element, "error-channel");
+
 		return builder.getBeanDefinition();
 	}
 }

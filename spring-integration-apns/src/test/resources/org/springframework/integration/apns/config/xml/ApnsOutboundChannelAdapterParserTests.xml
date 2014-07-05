@@ -11,11 +11,10 @@
 	</int:channel>
 
 
-	<int-apns:feedback-channel-adapter
+	<int-apns:outbound-channel-adapter
 		certificate-path="classpath:example.pkcs12" apns-host="localhost"
 		apns-port="5153" key-store-password="test123" channel="out"
-		id="apnsFeedbackAdapter">
-		<int:poller cron="*/10 * * * * *"></int:poller>
-	</int-apns:feedback-channel-adapter>
+		id="apnsOutboundAdapter">
+	</int-apns:outbound-channel-adapter>
 
 </beans>

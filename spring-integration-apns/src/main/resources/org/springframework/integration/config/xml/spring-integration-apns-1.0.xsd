@@ -88,14 +88,23 @@
 
 
 	<xsd:attributeGroup name="apnsCommonAttributes">
-		<xsd:attribute name="is-sandbox" type="xsd:string">
+		<xsd:attribute name="apns-host" type="xsd:string" use="required">
 			<xsd:annotation>
 				<xsd:documentation>
 					<![CDATA[
-	This attribute can be used to switch between the apple production servers and the sandbox servers. Defaults to 'false'
+	This attribute represents the host server to which the APNS connection needs to be made inorder to
+	send or receive information
 					]]></xsd:documentation>
 			</xsd:annotation>
 		</xsd:attribute>
+		<xsd:attribute name="apns-port" type="xsd:string" use="required">
+			<xsd:annotation>
+				<xsd:documentation>
+					<![CDATA[
+	This attribute represents the server port to which the APNS connection needs to be made 
+					]]></xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>		
 		<xsd:attribute name="certificate-path" type="xsd:string"
 			use="required">
 			<xsd:annotation>
@@ -154,23 +163,4 @@
 			</xsd:annotation>
 		</xsd:attribute>
 	</xsd:attributeGroup>
-	
-	<xsd:complexType name="gatewayType">
-		<xsd:annotation>
-			<xsd:documentation>
-				Defines common configuration for gateway adapters.
-			</xsd:documentation>
-		</xsd:annotation>
-		<xsd:attribute name="id" type="xsd:string" />
-		<xsd:attribute name="reply-channel" type="xsd:string">
-			<xsd:annotation>
-				<xsd:appinfo>
-					<tool:annotation kind="ref">
-						<tool:expected-type type="org.springframework.integration.MessageChannel" />
-					</tool:annotation>
-				</xsd:appinfo>
-			</xsd:annotation>
-		</xsd:attribute>
-	</xsd:complexType>
-
 </xsd:schema>

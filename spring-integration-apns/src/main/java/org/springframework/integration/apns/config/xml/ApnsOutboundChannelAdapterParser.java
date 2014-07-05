@@ -19,7 +19,6 @@ import org.springframework.beans.factory.support.AbstractBeanDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.xml.ParserContext;
 import org.springframework.integration.apns.outbound.ApnsOutboundChannelAdapter;
-import org.springframework.integration.apns.outbound.ApnsOutboundGateway;
 import org.springframework.integration.config.xml.AbstractOutboundChannelAdapterParser;
 import org.springframework.integration.config.xml.IntegrationNamespaceUtils;
 import org.w3c.dom.Element;
@@ -45,15 +44,15 @@ public class ApnsOutboundChannelAdapterParser extends AbstractOutboundChannelAda
 
 	@Override
 	protected AbstractBeanDefinition parseConsumer(Element element, ParserContext parserContext) {
-		BeanDefinitionBuilder builder = BeanDefinitionBuilder.genericBeanDefinition(ApnsOutboundGateway.class);
-		builder.addPropertyValue("producesReply", false);
+		BeanDefinitionBuilder builder = BeanDefinitionBuilder.genericBeanDefinition(ApnsOutboundChannelAdapter.class);
+		//builder.addPropertyValue("producesReply", false);
 		IntegrationNamespaceUtils.setValueIfAttributeDefined(builder, element, "certificate-path");
 		IntegrationNamespaceUtils.setValueIfAttributeDefined(builder, element, "key-store-password");
-		IntegrationNamespaceUtils.setValueIfAttributeDefined(builder, element, "is-sandbox");
 		IntegrationNamespaceUtils.setValueIfAttributeDefined(builder, element, "tls-required");
 		IntegrationNamespaceUtils.setValueIfAttributeDefined(builder, element, "concurrent-connections");
 		IntegrationNamespaceUtils.setReferenceIfAttributeDefined(builder, element, "error-channel");
-		//IntegrationNamespaceUtils.setReferenceIfAttributeDefined(builder, element, "channel");
+		IntegrationNamespaceUtils.setValueIfAttributeDefined(builder, element, "apns-host");
+		IntegrationNamespaceUtils.setValueIfAttributeDefined(builder, element, "apns-port");
 		IntegrationNamespaceUtils.setReferenceIfAttributeDefined(builder, element, "header-mapper");
 		
 		return builder.getBeanDefinition();

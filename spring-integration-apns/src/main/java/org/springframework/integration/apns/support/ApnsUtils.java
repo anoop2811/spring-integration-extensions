@@ -15,18 +15,19 @@
  */
 package org.springframework.integration.apns.support;
 
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.security.KeyStore;
+import java.security.KeyManagementException;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
+import java.security.UnrecoverableKeyException;
 import java.security.cert.CertificateException;
 
-import org.apache.commons.io.IOUtils;
+import org.springframework.core.io.Resource;
 import org.springframework.util.Assert;
 
 import com.relayrides.pushy.apns.ApnsEnvironment;
 import com.relayrides.pushy.apns.PushManager;
+import com.relayrides.pushy.apns.PushManagerFactory;
 import com.relayrides.pushy.apns.util.SimpleApnsPushNotification;
 
 /**
@@ -38,41 +39,38 @@ import com.relayrides.pushy.apns.util.SimpleApnsPushNotification;
  */
 public final class ApnsUtils {
 	
-	public static final String PKCS12_KEY_STORE = "PKCS12";
-
 	/** Prevent instantiation. */
 	private ApnsUtils() {
 		throw new AssertionError();
 	}
 
 	public static PushManager<SimpleApnsPushNotification> initializePushManager(
-			String certificatePath, String keyStorePassword,
-			int concurrentConnections, boolean tlsRequired, boolean isSandbox)
+			Resource certificate, String keyStorePassword,
+			int concurrentConnections, ApnsEnvironment apnsEnvironment)
 			throws IOException, KeyStoreException, NoSuchAlgorithmException, CertificateException {
 		PushManager<SimpleApnsPushNotification> pushManager = null;
-		FileInputStream keystoreInputStream = null;
 		try {
-			if (tlsRequired) {
-				Assert.hasLength(certificatePath);
-				Assert.hasLength(keyStorePassword);
-			}
-			keystoreInputStream = new FileInputStream(certificatePath);
-			ApnsEnvironment apnsEnvironment = ApnsEnvironment
-					.getProductionEnvironment();
-			if (isSandbox) {
-				apnsEnvironment = ApnsEnvironment.getSandboxEnvironment();
-			}
-			KeyStore keyStore = KeyStore.getInstance(PKCS12_KEY_STORE);
-			keyStore.load(keystoreInputStream, keyStorePassword.toCharArray());
-			pushManager = new PushManager<SimpleApnsPushNotification>(
-					apnsEnvironment, keyStore, keyStorePassword.toCharArray(),
-					concurrentConnections);
-		}  finally {
-			IOUtils.closeQuietly(keystoreInputStream);
-			
+			Assert.notNull(certificate.getFile());
+			Assert.isTrue(certificate.getFile().exists());
+			Assert.hasLength(keyStorePassword);
+			String certificatePath = certificate.getFile().getAbsolutePath();
+			PushManagerFactory<SimpleApnsPushNotification> pushManagerFactory = new PushManagerFactory<SimpleApnsPushNotification>(
+					apnsEnvironment,
+					PushManagerFactory.createDefaultSSLContext(
+							certificatePath, keyStorePassword));
+			pushManager = pushManagerFactory.buildPushManager();
+		} catch (UnrecoverableKeyException e) {
+			// TODO Auto-generated catch block
+			throw new RuntimeException("Unable to create a connection to the apple server, please check the certificate and/or key store password");
+		} catch (KeyManagementException e) {
+			throw new RuntimeException("Unable to create a connection to the apple server, please check the certificate");
 		}
+		
 		return pushManager;
 
 	}
+	
+
+	
 
 }

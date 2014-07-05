@@ -33,7 +33,7 @@ ext {
 	mockitoVersion = '1.9.5'
 	springVersion = '3.2.6.RELEASE'
 	springIntegrationVersion = '3.0.1.RELEASE'
-	pushyVersion = '0.2'
+	pushyVersion = '0.3'
 	commonsIoVersion='2.0.1'
 	idPrefix = 'spring-integration-apns'
 }
