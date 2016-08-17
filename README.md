@@ -6,6 +6,7 @@ The Spring Integration Extensions project provides extension modules for [Spring
 ## Available Modules
 
 * [Amazon Web Services (AWS)][] Support
+* [Hazelcast][] Support
 * [Kafka][] Support
 * [MQ Telemetry Transport (MQTT)][] Support
 * [Print][] Support
@@ -14,7 +15,7 @@ The Spring Integration Extensions project provides extension modules for [Spring
 * [Splunk][] Support
 * [Voldemort][] Support
 * [XQuery][] Support
-
+* Zip Support (Compression and Uncompression)
 
 ## Samples
 
@@ -120,7 +121,7 @@ The Spring Integration Extensions Framework is released under version 2.0 of the
 [Git]: http://help.github.com/set-up-git-redirect
 [Gradle build and release FAQ]: https://github.com/SpringSource/spring-framework/wiki/Gradle-build-and-release-FAQ
 [Pull requests]: http://help.github.com/send-pull-requests
-[contributor guidelines]: https://github.com/SpringSource/spring-integration/wiki/Contributor-guidelines
+[contributor guidelines]: https://github.com/spring-projects/spring-integration/blob/master/CONTRIBUTING.adoc
 [administrator guidelines]: https://github.com/SpringSource/spring-integration/wiki/Administrator-Guidelines
 [Spring Integration Samples]: https://github.com/SpringSource/spring-integration-samples
 [Spring Integration Templates]: https://github.com/SpringSource/spring-integration-templates/tree/master/si-sts-templates
@@ -139,6 +140,7 @@ The Spring Integration Extensions Framework is released under version 2.0 of the
 [MQ Telemetry Transport]: http://mqtt.org/
 [Websockets]: http://www.html5rocks.com/en/tutorials/websockets/basics/
 [XQuery]: http://en.wikipedia.org/wiki/XQuery
-[Splunk]:http://www.splunk.com/
+[Splunk]: http://www.splunk.com/
 [Amazon Web Services (AWS)]: http://aws.amazon.com/
 [MQ Telemetry Transport (MQTT)]: http://mqtt.org/
+[Hazelcast]: http://hazelcast.org/
